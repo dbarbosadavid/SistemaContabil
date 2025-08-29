@@ -7,10 +7,10 @@ const Login: React.FC = () => {
         <>
             <h1>Login</h1>
             <form>
-                <label>Email:</label>
+                <label>E-mail:  </label>
                 <input type="email" required /><br></br>
 
-                <label>Senha:</label>
+                <label>Senha:  </label>
                 <input type="password" required /><br></br>
 
                 <button type="submit">Entrar</button>
