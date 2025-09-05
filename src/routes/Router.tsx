@@ -11,8 +11,8 @@ import Login from "../pages/Login";
 const AppRoutes: React.FC = () => {
   return (
     <RouterRoutes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/" element={<Dashboard />} />
+      <Route path="/" element={<Login />} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/usuarios" element={<Usuarios />} />
       <Route path="/lancamentos" element={<Lancamentos />} />
       <Route path="/contas" element={<Contas />} />
