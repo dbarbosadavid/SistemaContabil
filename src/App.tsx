@@ -7,7 +7,7 @@ import { useAuth } from './firebase/useAuth';
 
 
 function App() {
-  const { user, loading } = useAuth();
+  const { user } = useAuth();
   
   if (user) {
     return (
