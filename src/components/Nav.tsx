@@ -1,19 +1,34 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import '../Nav.css';
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
 const Nav: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao deslogar.");
+    }
+  };
+
   return (
     <nav id="nav">
-        <Link to="/dashboard">Dashboard</Link>
+        <Link to="/">Dashboard</Link>
         <Link to="/usuarios">Usuarios</Link>
         <Link to="/lancamentos">Lancamentos</Link>
         <Link to="/contas">Contas</Link>
         <Link to="/relatorios">Relatorios</Link>
         <Link to="/about">Sobre</Link>
-        <Link onClick={()=>{
-          window.confirm("Deseja realmente sair? ")
-        }} to="/">Sair</Link>
+        <a onClick={()=>{
+          window.confirm("Deseja realmente sair? "),
+          handleLogout()
+        }}>Sair</a>
     </nav>
   )
 };

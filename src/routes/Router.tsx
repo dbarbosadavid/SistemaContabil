@@ -6,13 +6,11 @@ import Usuarios from "../pages/Usuarios";
 import Lancamentos from "../pages/Lancamentos";
 import Contas from "../pages/Contas";
 import Relatorios from "../pages/Relatorios";
-import Login from "../pages/Login";
 
 const AppRoutes: React.FC = () => {
   return (
     <RouterRoutes>
-      <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<Dashboard />} />
       <Route path="/usuarios" element={<Usuarios />} />
       <Route path="/lancamentos" element={<Lancamentos />} />
       <Route path="/contas" element={<Contas />} />

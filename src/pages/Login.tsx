@@ -1,50 +1,59 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../firebase/firebase";
 
-function validaLogin(login: String, senha: String){
-    const preLogin = 'david';
-    const preSenha = '123' 
-
-    if (preLogin == login && preSenha == senha){
-        return true
-    }
-    else {
-        return false
-    }
-}
-// toDO: referenciar a página de login na rota e no nav
 const Login: React.FC = () => {
-    const navigate = useNavigate();
-    const [user, setUser] = useState("");
-    const [senha, setSenha] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setSenha] = useState("");
+  
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log("Logado:", userCredential.user);
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message);
+    }
+  };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("Usuário criado:", userCredential.user);
+      alert("Usuário criado com sucesso!");
+    } catch (error: any) {
+      console.error(error);
+      alert(error.message);
+    }
+  };
 
-        navigate("/page/dashboard");
-    };
-    
-    return (
-        <>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    placeholder="Usuário"
-                    value={user}
-                    onChange={(e) => setUser(e.target.value)}
-                />
-                <br />
-                <input
-                    placeholder="Senha"
-                    value={senha}
-                    onChange={(e) => setSenha(e.target.value)}
-                />
-                <br />
-                <button type="submit">Entrar</button>
-            </form>
-        </>
-    )
-}
+  return (
+    <>
+        <h1>Bem Vindo!!!</h1>
+        <h1>Login</h1>
+        <form>
+            <input
+                id="email"
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            <br/>
+            <input
+                id="password"
+                type="password"
+                placeholder="Senha"
+                value={password}
+                onChange={(e) => setSenha(e.target.value)}
+            />
+            <br/>
+            <button onClick={handleLogin}>Entrar</button>
+            <button onClick={handleSignup}>Cadastrar</button>
+        </form>
+    </>
+  );
+};
 
 export default Login;
