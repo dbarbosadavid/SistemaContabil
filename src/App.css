@@ -19,6 +19,30 @@
     animation: logo-spin infinite 20s linear;
   }
 }
+input{
+  text-align: center;
+  font-size: 15px;
+  height: 30px;
+}
+
+input, button {
+  width: 70%;
+  margin-bottom: 2vmax;
+  margin-top: -10px;
+}
+
+#dbit-logo{
+  width: 10rem;
+  margin-bottom: -40px;
+}
 
 
+div #form {
+  padding: 25px;
+  padding-right: 30px;
+  align-self: center;
+  border: 3px;
+  border-style:double;
+  border-radius: 20px;
+}
 

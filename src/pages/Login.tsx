@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../firebase/firebase";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -29,11 +29,30 @@ const Login: React.FC = () => {
     }
   };
 
+  const signInWithGoogle = async () => {
+      try {
+          const result = await signInWithPopup(auth, provider);
+          // O usuário logou com sucesso!
+          const user = result.user;
+          console.log("Usuário logado:", user);
+          // Você pode redirecionar o usuário ou atualizar o estado do app aqui
+      } catch (error: any) {
+          // Lidar com erros aqui.
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error("Erro ao fazer login com Google:", errorCode, errorMessage);
+      }
+  };
+
+
   return (
     <>
-        <h1>Bem Vindo!!!</h1>
-        <h1>Login</h1>
+      <img src="src\assets\dbit-logo.png" alt="" id="dbit-logo"/>      
+      <h1>Bem vindo ao DBIT!!!</h1>
+      <div id="form">
+
         <form>
+          <h1>Login</h1>
             <input
                 id="email"
                 placeholder="E-mail"
@@ -50,8 +69,17 @@ const Login: React.FC = () => {
             />
             <br/>
             <button onClick={handleLogin}>Entrar</button>
-            <button onClick={handleSignup}>Cadastrar</button>
+            <br/>
+            <p>Não tem conta? Cadastre-se!</p>
+            <button onClick={handleSignup}>Cadastrar-se</button>
         </form>
+        <button onClick={signInWithGoogle}>
+          <img src="src\assets\google-logo.png" width="30"/>
+          <br/>
+          Logar com Google
+        </button>
+      </div>
+
     </>
   );
 };
