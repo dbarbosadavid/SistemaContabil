@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../firebase/firebase";
+import googleLogo from "../assets/google-logo.png"
+import dbitLogo from "../assets/dbit-logo.png"
+
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -47,7 +50,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <img src="src\assets\dbit-logo.png" alt="" id="dbit-logo"/>      
+      <img src={dbitLogo} alt="" id="dbit-logo"/>      
       <h1>Bem vindo ao DBIT!!!</h1>
       <div id="form">
 
@@ -74,7 +77,7 @@ const Login: React.FC = () => {
             <button onClick={handleSignup}>Cadastrar-se</button>
         </form>
         <button onClick={signInWithGoogle}>
-          <img src="src\assets\google-logo.png" width="30"/>
+          <img src={googleLogo} width="30"/>
           <br/>
           Logar com Google
         </button>
