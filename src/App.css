@@ -25,7 +25,7 @@ input{
   height: 30px;
 }
 
-input, button {
+input, .formButton {
   width: 70%;
   margin-bottom: 2vmax;
   margin-top: -10px;
@@ -44,5 +44,18 @@ div #form {
   border: 3px;
   border-style:double;
   border-radius: 20px;
+}
+
+#ativos, #passivos{
+  display: inline-block;
+}
+
+.grupo-contas{
+  border: 5px;
+  border-style:double;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-top: 3rem;
+  margin-left: 2rem;
 }
 

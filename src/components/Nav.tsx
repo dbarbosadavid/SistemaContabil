@@ -19,8 +19,7 @@ const Nav: React.FC = () => {
 
   return (
     <nav id="nav">
-        <Link to="/">Dashboard</Link>
-        <Link to="/usuarios">Usuarios</Link>
+        <Link to="/">Balanco</Link>
         <Link to="/lancamentos">Lancamentos</Link>
         <Link to="/contas">Contas</Link>
         <Link to="/relatorios">Relatorios</Link>

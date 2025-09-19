@@ -1,8 +1,7 @@
 import React from "react";
 import { Routes as RouterRoutes, Route } from "react-router-dom";
 import About from "../pages/About";
-import Dashboard from "../pages/Dashboard";
-import Usuarios from "../pages/Usuarios";
+import Balanco from "../pages/Balanco";
 import Lancamentos from "../pages/Lancamentos";
 import Contas from "../pages/Contas";
 import Relatorios from "../pages/Relatorios";
@@ -10,8 +9,7 @@ import Relatorios from "../pages/Relatorios";
 const AppRoutes: React.FC = () => {
   return (
     <RouterRoutes>
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/usuarios" element={<Usuarios />} />
+      <Route path="/" element={<Balanco />} />
       <Route path="/lancamentos" element={<Lancamentos />} />
       <Route path="/contas" element={<Contas />} />
       <Route path="/relatorios" element={<Relatorios />} />

@@ -71,10 +71,10 @@ const Login: React.FC = () => {
                 onChange={(e) => setSenha(e.target.value)}
             />
             <br/>
-            <button onClick={handleLogin}>Entrar</button>
+            <button className="formButton" onClick={handleLogin}>Entrar</button>
             <br/>
             <p>Não tem conta? Cadastre-se!</p>
-            <button onClick={handleSignup}>Cadastrar-se</button>
+            <button className="formButton" onClick={handleSignup}>Cadastrar-se</button>
         </form>
         <button onClick={signInWithGoogle}>
           <img src={googleLogo} width="30"/>
