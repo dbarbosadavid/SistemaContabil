@@ -4,16 +4,15 @@ import Body from './components/Body';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import { useAuth } from './firebase/useAuth';
-import { ref, set } from 'firebase/database';
-import { db } from './firebase/firebase';
+
 
 
 function App() {
   const { user } = useAuth();
-  
+  //addLancamentoService(new Date(), "Venda", 6500, "Mercadorias", 'credito', user)
+
   if (user) {
-    const uid = user.uid;
-    set(ref(db, "users/" + uid), {"login": "admin", "senha": "admin"})
+    
 
     return (
       <BrowserRouter>

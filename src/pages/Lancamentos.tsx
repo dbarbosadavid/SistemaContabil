@@ -1,11 +1,30 @@
-import React from "react";
+import { useAuth } from "../firebase/useAuth";
+import { getAllLancamento } from "../service/LancamentoService";
+import React, { useEffect, useState } from "react";
+import type LancamentoDTO from "../model/dto/LancamantoDTO";
+
+
+
 
 const Lancamentos: React.FC = () => {
+    const { user } = useAuth();
+    const [lancamentos, setLancamentos] = useState<any>([]);
+
+    useEffect(() => {
+        const fetchLancamentos = async () => {
+            if (user) {
+                const data = await getAllLancamento(user);
+                setLancamentos(data);
+            }
+        };
+        fetchLancamentos();
+    }, [user]);
+
+
     return (
         <>
             <h1>Lançamentos</h1>
             <button>Novo Lançamento</button>
-
             <table border={1}>
                 <thead>
                 <tr>
@@ -18,19 +37,23 @@ const Lancamentos: React.FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>01/09/2025</td>
-                    <td>Venda de produto</td>
-                    <td>Receita</td>
-                    <td>R$ 500,00</td>
-                    <td>Crédito</td>
-                    <td><button>Editar</button> <button>Excluir</button></td>
-                </tr>
+                    {lancamentos.map((lancamento : LancamentoDTO, idx: any) => (
+                                <tr key={idx}>
+                                    <td>{lancamento.getData().toLocaleDateString()}</td>
+                                    <td>{lancamento.getDescricao()}</td>
+                                    <td>{lancamento.getConta().getNome()}</td>
+                                    <td>R$ {lancamento.getValor().toFixed(2)}</td>
+                                    <td>{lancamento.getTipo()}</td>
+                                    <td><button>Editar</button> <button>Excluir</button></td>
+                                </tr>
+                        ))}
+                    
                 </tbody>
             </table>
 
         </>
-    )
+    );
 }
 
 export default Lancamentos;
+

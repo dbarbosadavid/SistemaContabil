@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import '../Nav.css';
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase/firebase";
+import { SubMenu } from "./SubMenu";
 
 const Nav: React.FC = () => {
   const navigate = useNavigate();
@@ -20,7 +21,13 @@ const Nav: React.FC = () => {
   return (
     <nav id="nav">
         <Link to="/">Balanco</Link>
-        <Link to="/lancamentos">Lancamentos</Link>
+        <Link to="/lancamentos">
+          <SubMenu 
+          title="Lançamentos"
+          items={["Novo Lançamento", "Listar Lançamentos"]}
+          left={"-1.5rem"}
+          />
+        </Link>
         <Link to="/contas">Contas</Link>
         <Link to="/relatorios">Relatorios</Link>
         <Link to="/about">Sobre</Link>
