@@ -17,7 +17,7 @@ export class Conta {
     }
 
     public jsonToObject() {
-        
+        return this.nome + this.grupo + this.subGrupo + this.elemento
     }
 
 }
