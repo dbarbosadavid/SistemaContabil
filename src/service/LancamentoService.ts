@@ -27,7 +27,6 @@ export const getAllLancamento = async (user: any) => {
             listaLancamentos.push(lancamentoObj);
     })
 
-
     return listaLancamentos;
 };
 
@@ -50,9 +49,7 @@ export const addLancamentoService = async (data: Date, descricao:string, valor: 
         conta.subGrupo,
         conta.elemento
     )
-
-    console.log(contaTemporaria)
-
+    
     const lancamento = new Lancamento(
         data,
         descricao,

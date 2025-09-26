@@ -8,12 +8,18 @@ import { useAuth } from './firebase/useAuth';
 
 
 function App() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   //addLancamentoService(new Date(), "Venda", 6500, "Mercadorias", 'credito', user)
 
-  if (user) {
-    
+  if(loading){
+    return (
+      <div className="spinner-container">
+        <div className='spinner'></div>
+      </div>
+    )
+  }
 
+  if (user) {
     return (
       <BrowserRouter>
         <Nav />
