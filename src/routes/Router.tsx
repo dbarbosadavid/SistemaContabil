@@ -5,6 +5,7 @@ import Balanco from "../pages/Balanco";
 import Lancamentos from "../pages/Lancamentos";
 import Contas from "../pages/Contas";
 import Relatorios from "../pages/Relatorios";
+import NovoLancamento from "../pages/NovoLancamento";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -14,6 +15,8 @@ const AppRoutes: React.FC = () => {
       <Route path="/contas" element={<Contas />} />
       <Route path="/relatorios" element={<Relatorios />} />
       <Route path="/about" element={<About />} />
+      <Route path="/novo-lancamento" element={<NovoLancamento  />} />
+
     </RouterRoutes>
   );
 };
