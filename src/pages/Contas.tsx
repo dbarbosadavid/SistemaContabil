@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useAuth } from "../firebase/useAuth";
+import type { ContaDTO } from "../model/dto/ContaDTO";
+import { getAllContaService } from "../service/ContasService";
+import { getLancamentoContaService } from "../service/LancamentoService";
+import type LancamentoDTO from "../model/dto/LancamantoDTO";
 
 const Contas: React.FC = () => {
+    const { user } = useAuth();
+        const [contas, setContas] = useState<any>([]);
+        const [nomeConta, setNomeConta] = useState<any>([]);
+        const [lancamentos, setLancamentos] = useState<any>([]);
+
+        useEffect(() => {
+            const fetchConta = async () => {
+                if (user) {
+                    const data = await getAllContaService();
+                    setContas(data);
+                }
+            };
+            fetchConta();
+
+            const fetchLancamentos = async () => {
+                if (user) {
+                    const data = await getLancamentoContaService(nomeConta, user);
+                    setLancamentos(data);
+                }
+            };
+            fetchLancamentos();
+        }, [user, nomeConta]);
+
+
     return (
         <>
-            <h1>Contas a Pagar / Receber</h1>
+            <h1>Listar Contas</h1>
+            <select onChange={(e) => setNomeConta(e.target.value)}>
+                {contas.map((conta : ContaDTO) => (
+                                    <option value={conta.getNome()}>{conta.getGrupo()}.{conta.getSubGrupo()}.{conta.getElemento()} {conta.getNome()}</option>
+                            ))}
+            </select>
+            
+            <h2>{nomeConta}</h2>
             <button>Nova Conta</button>
 
             <table border={1}>
@@ -17,13 +53,17 @@ const Contas: React.FC = () => {
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>Aluguel</td>
-                    <td>05/09/2025</td>
-                    <td>R$ 1.200,00</td>
-                    <td>Pendente</td>
-                    <td><button>Pagar</button> <button>Editar</button></td>
-                </tr>
+                    {lancamentos.map((lancamento : LancamentoDTO, idx: any) => (
+                                    <tr key={idx}>
+                                        <td>{lancamento.getData().toLocaleDateString()}</td>
+                                        <td>{lancamento.getDescricao()}</td>
+                                        <td>{lancamento.getConta().getNome()}</td>
+                                        <td>R$ {lancamento.getValor().toFixed(2)}</td>
+                                        <td>{lancamento.getTipo()}</td>
+                                        <td><button>Editar</button> <button>Excluir</button></td>
+                                    </tr>
+                            ))}
+                    
                 </tbody>
             </table>
         </>

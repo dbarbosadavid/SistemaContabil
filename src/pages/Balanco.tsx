@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TipoAtivo } from "../components/TipoAtivo";
 import { useAuth } from "../firebase/useAuth";
-import { getAllLancamento } from "../service/LancamentoService";
+import { getAllLancamentoService } from "../service/LancamentoService";
 import type LancamentoDTO from "../model/dto/LancamantoDTO";
 
 
@@ -13,7 +13,7 @@ const Balanco: React.FC = () => {
   useEffect(() => {
     const fetchLancamentos = async () => {
       if (user) {
-        const data = await getAllLancamento(user);
+        const data = await getAllLancamentoService(user);
                   setLancamentos(data);
       }
     };

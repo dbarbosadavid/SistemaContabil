@@ -4,12 +4,13 @@ import Body from './components/Body';
 import Nav from './components/Nav';
 import Login from './pages/Login';
 import { useAuth } from './firebase/useAuth';
+//import { addLancamentoService } from './service/LancamentoService';
 
 
 
 function App() {
   const { user, loading } = useAuth();
-  //addLancamentoService(new Date(), "Venda", 6500, "Mercadorias", 'credito', user)
+  //addLancamentoService(new Date(), "Compra", 6500, "Caixa", 'debito', user)
 
   if(loading){
     return (

@@ -1,10 +1,7 @@
 import { useAuth } from "../firebase/useAuth";
-import { getAllLancamento } from "../service/LancamentoService";
+import { getAllLancamentoService } from "../service/LancamentoService";
 import React, { useEffect, useState } from "react";
 import type LancamentoDTO from "../model/dto/LancamantoDTO";
-
-
-
 
 const Lancamentos: React.FC = () => {
     const { user } = useAuth();
@@ -13,7 +10,7 @@ const Lancamentos: React.FC = () => {
     useEffect(() => {
         const fetchLancamentos = async () => {
             if (user) {
-                const data = await getAllLancamento(user);
+                const data = await getAllLancamentoService(user);
                 setLancamentos(data);
             }
         };

@@ -26,7 +26,6 @@ const NovoLancamento: React.FC = () => {
 
     const dateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         let date = e.target.valueAsDate?.toISOString()
-        console.log(date?.slice(0, 10))
         date = date?.slice(0, 10)
 
         if(!date)
@@ -41,18 +40,19 @@ const NovoLancamento: React.FC = () => {
         }
     }
 
+
     return (
         <>
             <form id="lancamento-form">
                 <label>Lançamento de: </label>
-                <input type="text" placeholder="Ex.: Compra de matéria-prima" className="input-descricao"/> 
+                <input id="descricao" type="text" placeholder="Ex.: Compra de matéria-prima" className="input-descricao"/> 
               
 
                 <label>Data do Lançamento</label>
                 <input type="date" name="" id="date-input" onChange={dateChange} value={date}/>
 
                 <label>Conta</label>
-                <select id="tipo">
+                <select id="conta">
                     {listaContas.map(conta => (
                         <option value={conta.nome}>{conta.grupo}.{conta.subGrupo}.{conta.elemento} {conta.nome}</option>
                     ))}
@@ -60,15 +60,16 @@ const NovoLancamento: React.FC = () => {
 
                 <label>Tipo</label>    
                 <select id="tipo">
-                    <option value="Crédito" selected>Crédito</option>
-                    <option value="Débito">Débito</option>
+                    <option value="credito" selected>Crédito</option>
+                    <option value="debito">Débito</option>
                 </select>
 
                 <label>Valor</label>
-                <input type="Text" placeholder="R$ 0,00" className="input-descricao" id="money" value={valor} onChange={handleChange}/>
+                <input type="Text" placeholder="R$ 0,00" className="input-descricao" id="valor" value={valor} onChange={handleChange}/>
                 <hr />
-                <button type="submit">Criar Lançamento</button>
             </form>
+            <button type="submit">Criar Lançamento</button>
+
         </>
     );
 }

@@ -5,7 +5,7 @@ import Lancamento from "../model/Lancamento";
 import { getConta } from "../repository/ContasRepository";
 import { Conta } from "../model/Contas";
 
-export const getAllLancamento = async (user: any) => {
+export const getAllLancamentoService = async (user: any) => {
     const response = await getAllRepository(user);
     const listaLancamentos = Array<LancamentoDTO>();
 
@@ -59,4 +59,33 @@ export const addLancamentoService = async (data: Date, descricao:string, valor: 
     )
 
     addLancamento(lancamento, user)
+}
+
+export const getLancamentoContaService = async (searchItem: string, user: any) => {
+    const response = await getAllRepository(user)
+
+    const listaLancamentos = Array<LancamentoDTO>();
+
+    response.forEach((snapshot) => {
+            const lancamento = snapshot.val();
+            console.log("lancamento: ", lancamento.conta.nome)
+            if(lancamento.conta.nome == searchItem){
+                console.log("igual")
+                const lancamentoObj = new LancamentoDTO(
+                    snapshot.key,
+                    new Date(lancamento.data),
+                    lancamento.descricao,
+                    lancamento.valor,
+                    new ContaDTO(
+                        lancamento.conta.nome,
+                        lancamento.conta.grupo,
+                        lancamento.conta.subGrupo,
+                        lancamento.conta.elemento
+                    ),
+                    lancamento.tipo
+                );
+                listaLancamentos.push(lancamentoObj);
+            }
+    })
+    return listaLancamentos;
 }

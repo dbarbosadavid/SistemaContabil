@@ -15,7 +15,7 @@ export const SubMenu: React.FC<SubMenuProps> = (props) => {
     return (
         <>
             <a className="submenu" href="">{props.title}</a>
-            <ul style={{ marginLeft: props.left }}>
+            <ul style={{ marginLeft: props.left , marginTop: '15px'}}>
                 {props.items.map((item, idx) => (
                     <li key={idx}><Link to={textoParaURL(item)}>{item}</Link></li>
                 ))}
